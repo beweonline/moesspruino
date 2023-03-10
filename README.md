@@ -1,5 +1,4 @@
 # moesspruino
-<<<<<<< HEAD
 customized Espruino IDE originally for Moessinger junior high school design and technology education  
 changes to the original IDE are documented in `customizations.txt`
 
@@ -61,6 +60,3 @@ firmware for ESP8266
 --------------------
 the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically  
 with the included espruino firmware by checking the windows registry for Silab devices on COM ports
-=======
-customized Espruino IDE for Moessinger high school design and technology education
->>>>>>> parent of e55a15e (Update README.md)
