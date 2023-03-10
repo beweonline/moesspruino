@@ -30,11 +30,12 @@ online access
 - follow the coding quick start from [espruino.com](http://www.espruino.com/Quick+Start+Code)  
 ```javascript
 // for NodeMCU boards
+var on = true;
 function blink() {
  on = !on;
  digitalWrite(NodeMCU.D0, on);
 }
-var i = setInterval(toggle, 500);
+var i = setInterval(blink, 500);
 ```
 
 binary workflow
