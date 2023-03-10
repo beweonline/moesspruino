@@ -1,0 +1,1 @@
+nexe -t x32-14.15.3 -n espruino -r "webIDE/**/*" -i server.js

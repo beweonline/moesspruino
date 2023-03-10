@@ -1,0 +1,354 @@
+>>> changes made 22/08/2022
+>>> @EspruinoTools\plugin\boardJSON.json
+>>> redirect to offline JSON definition of ESP8266_4MB
+
+  function loadJSON(env, jsonPath, callback) {    
+	if(jsonPath == "http://www.espruino.com/json/ESP8266_4MB.json"){
+		jsonPath = "/boardJSON/ESP8266_4MB.json";
+	}
+    Espruino.Core.Utils.getJSONURL(jsonPath, function(data){
+	  console.log("Loading "+jsonPath);
+      console.log("Board JSON loaded");
+
+********************************************************************************
+	  
+>>> changes made 22/08/2022
+>>> @EspruinoTools\core\config.json
+>>> inject JSON with settings during init of modules
+
+  function loadConfiguration(callback) {
+	console.log("CONFIG LOAD:", callback);
+    _get(function (value) {
+
+	fetch('./boardJSON/settings.json')
+	  .then((response) => response.json())
+	  .then((data) => {	  
+		  console.log("CONFIG KEYS:", data);
+		  for (var key in data) {
+			if (key=="set") continue;
+			Espruino.Config[key] = data[key];
+			if (Espruino.Core.Config.data[key] !== undefined &&
+				Espruino.Core.Config.data[key].onChange !== undefined)
+			  Espruino.Core.Config.data[key].onChange(data[key]);
+		  }
+		  if (callback!==undefined)
+			callback();
+	  });
+	});
+  }
+
+********************************************************************************
+
+>>> changes made 22/08/2022
+>>> @index.html
+>>> del https redirect
+>>> load ubuntu_source font + apply to body.style
+
+  <title>Espruino IDE</title>
+
+  <style>
+	@font-face {
+		font-family: "Ligconsolata";
+		src: url("boardJSON/Ligconsolata-Regular.ttf");
+	}
+
+	body {
+		font-family: "Ligconsolata";
+		font-variant-ligatures: normal;
+	}
+
+	.CodeMirror {
+	  font-family: "Ligconsolata";
+	  font-variant-ligatures: normal;
+	  
+	}
+	span[role="presentation"] {
+	  font-size: 30px;
+	}
+  </style>   
+  
+</head>
+
+********************************************************************************
+
+>>> changes made 22/08/2022
+>>> @EspruinoTools\core\terminal.js
+>>> del hyperlinks
+>>> link logo to espruino/reference
+
+    var html;
+    if (Espruino.Core.Terminal.OVERRIDE_CONTENTS) {
+      html = Espruino.Core.Terminal.OVERRIDE_CONTENTS;
+    } else {
+      html = `
+    <div style="max-width:400px;margin:auto;">
+      <p><a href="http://www.espruino.com/Reference" target="_blank"><img src="img/ide_logo.png" width="299" height="96" alt="Espruino IDE"/></a></p>
+      <p id="versioninfo" style="text-align:right"></p>
+    </div>`;
+      Espruino.Core.Utils.getVersionInfo(function(v) {
+        $("#versioninfo").html(v);
+        });
+      };
+	
+    terminal.innerHTML = html;
+
+********************************************************************************
+
+>>> changes made 22/08/2022
+>>> @js\core\code.js
+>>> del default code snippet
+
+    DEFAULT_CODE : ""
+
+********************************************************************************
+
+>>> changes made 22/08/2022
+>>> @js\plugins\tour.js
+>>> comment init and pass empty arrow func
+
+  Espruino.Plugins.Tour = {
+    init : /*init*/ _=>{} ,
+    runTour : runTour,
+    addTourButton : addTourButton
+  };
+  
+********************************************************************************
+
+>>> changes made 22/08/2022
+>>> @js\plugins\project.js
+>>> corrected if statement according to offline.js
+
+"use strict";
+(function(){
+  if (typeof chrome == "undefined" || !chrome.fileSystem) {
+    console.log("No chrome.fileSystem - Projects disabled");
+    return;
+  }
+  
+
+>>> del semicolon from end of url
+
+	url = "https://www.youtube.com/playlist?list=PLWusBqvaPOec0RJ-_iqPkvCAeKYyIb6mH";
+  
+********************************************************************************
+
+>>> changes made 24/08/2022
+>>> @js\plugins\testing.js
+>>> commented everything related to plugins\project
+
+function pollData()
+	intervall from 1000 -> 100
+
+********************************************************************************
+
+>>> changes made 24/08/2022
+>>> comment logging in various places
+>>> @js\core\status.js
+
+  function setStatus(text, progress) {
+    // console.log(">>> "+ text);
+	
+>>> @js\core\settingConsole.js
+
+  var oldConsoleLog = null; //console.log;
+/*  console.log = function() {
+    doLog('<span>', arguments, '</span>');
+    oldConsoleLog.apply(console, arguments);
+  } */
+
+>>> @EspruinoTools\core\serial.js
+
+      if (writeData[0].showStatus) {
+        Espruino.Core.Status.setStatus("Sending...", writeData[0].data.length);
+        //console.log("---> "+JSON.stringify(writeData[0].data));
+      }
+
+********************************************************************************
+
+>>> changes made 24/08/2022
+>>> @EspruinoTools\core\terminal.js
+>>> use elements[] to feed Processor.getWatched for flotcharts.org
+	  
+      if (elements[y]===undefined) {
+        var prev = y-1;
+        while (prev>=0 && elements[prev]===undefined) prev--;
+		
+		if(prev>0 && elements[prev][0].innerText.includes("{")) {
+			let text = elements[prev][0].innerText;
+			let receivedData = text.substr(5,text.length - 10);
+			//console.log("PREVIOUS:"+ receivedData+"!");
+			Espruino.callProcessor("getWatched",receivedData,function(){})		
+		}
+
+>>> therefore comment searchData(bufView) + call to Processor.getWatched
+
+	function outputDataHandler(readData)
+		...
+		//searchData(bufView);		
+				
+********************************************************************************
+
+>>> changes made 27/08/2022
+>>> @js\plugins\tern.js
+>>> load multiple definitions for tern.js with fetch()
+
+/* function getURL(url, c) { ...*/
+
+var server;
+var espruinoJSON;
+let definitions = ["espruino","browser","ecmascript"];
+let TernJSON = new Array;
+
+const urlPromise = new Promise((resolve, reject) => {
+	const result = definitions.forEach(
+		async def => {
+			const file = await fetch("data/"+def+".json");
+			const code = await file.json();
+			TernJSON.push(code);
+		});
+	function wait(i){
+		console.log("WAIT", i, TernJSON.length);
+		if(TernJSON[definitions.length-1] === undefined && i < 20){
+			i++;
+			setTimeout(wait.bind(this, i), 100);
+		} else if( TernJSON[definitions.length-1] !== undefined ) {
+			console.log("WAIT", i, TernJSON);
+			resolve( TernJSON );
+		} else if (i == 20) {
+			console.log("UH OH");
+			reject(new Error('failed to load defs for tern.js'));
+		}
+	}
+	let counter = 0;
+	wait(counter);
+});
+
+urlPromise.then( code => {	
+  //getURL("data/espruino.json", function(err, code) {
+  var codeMirror = Espruino.Core.EditorJavaScript.getCodeMirror();
+  //if (err) throw new Error("Request for ecma5.json failed: " + err);
+
+  server = new CodeMirror.TernServer({defs: code });
+				
+********************************************************************************
+
+>>> changes made 27/08/2022
+>>> @blockly\blockly.html
+>>> change background-color
+
+    <style>
+      html, body {
+        background-color: #222;
+	...	
+				
+********************************************************************************
+		
+>>> changes made 30/08/2022
+>>> @js\boardJSON\settings.js
+>>> point MODULE_URL search to ./modules folder
+
+"MODULE_URL": "./modules",
+
+********************************************************************************
+
+>>> changes made 30/08/2022
+>>> @index.html
+>>> branding
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="h-split">
+          <div class="h-split__left toolbar__buttons toolbar__buttons--left"></div>
+          <div class="h-split__left">
+		    <a style="text-decoration: none;" href="http://www.moessinger.at">
+			<div style="color: #c3d7e4; font-size: 1em; line-height: 0px; position: relative; top: -0.8em;">
+				<pre> _____                             _         </pre>
+				<pre>|     |___ ___ ___ ___ ___ ___ _ _|_|___ ___ </pre>
+				<pre>| | | | . | -_|_ -|_ -| . |  _| | | |   | . |</pre>
+				<pre>|_|_|_|___|___|___|___|  _|_| |___|_|_|_|___|</pre>
+				<pre>                      |_|                    </pre>
+			</div>
+			</a>
+		  </div>
+          <div class="h-split__right toolbar__buttons toolbar__buttons--right"></div>
+        </div>
+      </div>
+
+********************************************************************************
+
+>>> changes made 30/08/2022
+>>> @js\core\editorJavaScript.js
+>>> add CodeMirror hotkeys for code folding
+
+	...
+        "Ctrl-B": function(cm) {
+          cm.beautify();
+        },
+		"Ctrl-1": function(cm) {
+		  CodeMirror.commands.foldAll(cm);
+		},
+		"Ctrl-2": function(cm) {
+		  CodeMirror.commands.unfoldAll(cm);
+		}
+	}
+	...
+
+********************************************************************************
+
+>>> changes made 04/09/2022
+>>> @js\libs\codemirror\theme\espruino.css
+>>> swapped background color for terminal & code editor if focused (=darker now)
+
+.cm-s-espruino.CodeMirror { background-color: #333; color: #dcdccc; }
+.cm-s-espruino.CodeMirror-focused{ background-color: #222; color: #dcdccc; }
+
+>>> @css\components.css
+
+.terminal {background-color: #333;}
+.terminal.focus {background-color: #222;}
+
+********************************************************************************
+
+>>> changes made 08/09/2022
+>>> @data\testing_form.html
+>>> bg-col change, twice for each section:
+
+<table width="100%" height="100%" bgcolor="#333">
+
+>>> 30% width for "testingTable", 100% width & height for "flotplaceholder"
+
+  <tr>
+	<th style="width:30%;" valign="top"><div id="testingTable"></div></th>
+	<th valign="top">
+	  <div id="testingChart">
+		<div id="flotlegendholder">Legend</div>
+		<div id="flotplaceholder" style="width:100%;height:100%;"></div>
+	  </div>
+
+********************************************************************************
+
+>>> changes made 08/09/2022
+>>> @data\testing_initial.html
+>>> commented various buttons etc.
+
+********************************************************************************
+
+>>> changes made 08/09/2022
+>>> @index.html
+>>> added flot.resize plugin
+
+<script src="js/libs/flot/jquery.flot.resize.js"></script>
+
+********************************************************************************
+
+>>> changes made 08/09/2022
+>>> @js\plugins\testing.js
+>>> set col of dataPoint elements to white
+
+  function showDataPoints(){...
+  
+	$("#testingTable").css('color', 'white');
+  }
+  
+
+********************************************************************************
