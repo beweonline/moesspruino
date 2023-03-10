@@ -63,4 +63,4 @@ with the included espruino firmware by checking the windows registry for Silab d
 
 SililconLabs usb driver
 -----------------------
-if `flash/infoCOM.bat` can not detect an ESP8266 device you might have to install [CP210x USB to UART Bridge](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+if `infoCOM.bat` in the `flash` directory can not detect an ESP8266 device you might have to install [CP210x USB to UART Bridge](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
