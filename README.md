@@ -23,14 +23,26 @@ status
 - [x] moesspruino binaries run on personal win10 win7 installations
 - [ ] web-serial may not be working properly in school networks
 
+online access
+-------------
+- moesspruino is hosted here on [github.io](https://beweonline.github.io/moesspruino/webIDE/index.html)
+- connect with your microcontroller via the connection button
+- follow the coding quick start from [espruino.com](http://www.espruino.com/Quick+Start+Code)  
+```javascript
+// for NodeMCU boards
+function blink() {
+ on = !on;
+ digitalWrite(NodeMCU.D0, on);
+}
+var i = setInterval(toggle, 500);
+```
+
 binary workflow
 ---------------
 0. for portability reasons and offline use `moesspruino.exe` is a nexe-build of a node project
 1. it starts a node.js server and provides a customized espruino-ide-webpage on localhost:8080/index.html
-2. the system's default browser is targeted to that URL  
+2. the system's default browser is called and pointed to that URL  
    note that your webbrowser must support the web-serial interface (e.g. chrome or MS edge)
-3. connect with your NodeMCU microcontroller via the left upper corner button
-4. follow instruction and tutorials from espruino.com
 
 node.js workflow
 ----------------
@@ -39,5 +51,6 @@ make sure to have a working [node.js](https://nodejs.org/en/) runtime environmen
 
 compiling executables
 ---------------------
-to compile for windows use the `build_nexe.bat` and set appropriate parameters for your OS in the batch file  
+to compile for windows use the `build_nexe.bat`  
+set appropriate parameters for your target OS in the batch file  
 make sure you have the [nexe](https://github.com/nexe/nexe) module installed
