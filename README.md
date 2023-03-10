@@ -54,3 +54,8 @@ compiling executables
 to compile for windows use the `build_nexe.bat`  
 set appropriate parameters for your target OS in the batch file  
 make sure you have the [nexe](https://github.com/nexe/nexe) module installed
+
+firmware for ESP8266
+--------------------
+the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically  
+with the included epruino firmware by checking the windows registry for COM ports
