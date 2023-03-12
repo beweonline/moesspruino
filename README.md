@@ -6,7 +6,7 @@ background
 ----------
 main interrest is constructing a model of a portal/gantry robot with pick-and-place functionality from scratch  
 K8/9 pupils want to program animations for several servo motors with minimal supervision  
-gentel exposure to cnc and oo-programming to comply with national curriculum changes  
+gentle exposure to cnc and oo-programming to comply with national curriculum changes  
 project total cost per individual robot including NodeMCU esp8266 is limited to 10-15€
 
 descent
