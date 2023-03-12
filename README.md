@@ -10,7 +10,7 @@ project total cost per individual robot including NodeMCU esp8266 is limited to 
 
 descent
 -------
-[espruino](https://github.com/espruino) provides easy access too microcontrollers  
+[espruino](https://github.com/espruino) provides easy access to microcontrollers  
 wifi equipped chips can act as servers and host websites / services  
 programming of hardware, server and websites done in a single language: [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  
 an interactive development evnironment [IDE](https://www.espruino.com/ide/) is provided as a webpage  
@@ -25,7 +25,7 @@ status
 
 online access
 -------------
-- moesspruino is hosted here on [github.io](https://beweonline.github.io/moesspruino/webIDE/index.html)
+- moesspruino is hosted [here on github.io](https://beweonline.github.io/moesspruino/webIDE/index.html)
 - connect with your microcontroller via the connection button
 - follow the coding quick start from [espruino.com](http://www.espruino.com/Quick+Start+Code)  
 ```javascript
@@ -54,7 +54,7 @@ compiling executables
 ---------------------
 to compile for windows use the `build_nexe.bat`  
 set appropriate parameters for your target OS in the batch file  
-make sure you have the [nexe](https://github.com/nexe/nexe) module installed
+make sure you have the [nexe](https://github.com/nexe/nexe) module [installed](https://www.npmjs.com/package/nexe)
 
 firmware for ESP8266
 --------------------
