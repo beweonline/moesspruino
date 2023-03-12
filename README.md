@@ -54,7 +54,7 @@ compiling executables
 ---------------------
 to compile for windows use the `build_nexe.bat`  
 set appropriate parameters for your target OS in the batch file  
-make sure you have the [nexe](https://github.com/nexe/nexe) module [installed](https://www.npmjs.com/package/nexe)
+make sure you've got the [nexe](https://github.com/nexe/nexe) module [installed](https://www.npmjs.com/package/nexe)
 
 firmware for ESP8266
 --------------------
