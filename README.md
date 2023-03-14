@@ -22,7 +22,7 @@ established project is a very well [documented](https://www.espruino.com/)  with
 status
 ------
 - [x] moesspruino binaries and webide run on personal win10 win7 installations, however:
-- [ ] web-serial may not be working properly on every machine. check chrome's device log @ chrome://device-log.  
+- [ ] web-serial may not be working properly on every machine. monitor chrome's device log @ about://device-log/?refresh=<sec>.  
       confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/)  
       a version of Teranishi's Terminal for working with the ESP8266 is provided as temporary workaround
 
