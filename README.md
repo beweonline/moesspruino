@@ -22,7 +22,9 @@ established project is a very well [documented](https://www.espruino.com/)  with
 status
 ------
 - [x] moesspruino binaries run on personal win10 win7 installations
-- [ ] web-serial may not be working properly in school networks
+- [ ] web-serial may not be working properly on every machine  
+      confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/)  
+      teratermESP8266 is provided as temporary workaround
 
 online access
 -------------
