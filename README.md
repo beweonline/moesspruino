@@ -59,6 +59,19 @@ to compile for windows use the `build_nexe.bat`
 set appropriate parameters for your target OS in the batch file  
 make sure you've got the [nexe](https://github.com/nexe/nexe) module [installed](https://www.npmjs.com/package/nexe)
 
+linux permissions
+-----------------
+on a \*nix OS, chrome must be allowed to open tty ports  
+by default in a posix terminal you'd usually get
+```console
+foo@bar:~$ ls -l /dev/ttyUSB0
+crw-rw----. 1 root dialout 188, 0 Jan 01 00:00 /dev/ttyUSB0
+```
+then make your $user-account a member of the dialout group with
+```console
+foo@bar:~$ sudo usermod -a -G dialout $USER
+```
+
 firmware for ESP8266
 --------------------
 the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically  
