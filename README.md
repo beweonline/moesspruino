@@ -13,12 +13,12 @@ project total cost per individual robot including NodeMCU esp8266 is limited to 
 
 descent
 -------
-[espruino](https://github.com/espruino) provides easy access to microcontrollers  
+[espruino](https://github.com/espruino) provides low-threshold access to microcontrollers  
 wifi equipped chips can act as servers and host websites / services  
-programming of hardware, server and websites done in a single language: [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  
+programming of hardware, server and websites done in only one concurrent language: [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  
 an interactive development evnironment [IDE](https://www.espruino.com/ide/) is provided as a webpage  
-from there compatible chips can be addressed immediately through an interactive REPL console  
-espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via smartphones  
+from there compatible chips can be addressed interactively through a responsive [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) console  
+espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via smartphone hotspots  
 established project is a very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and concise [API](https://www.espruino.com/Reference#software) reference
 
 ide status
@@ -80,24 +80,24 @@ crw-rw----. 1 root dialout 188, 0 Jan 01 00:00 /dev/ttyUSB0
 ```
 then make your $user-account a member of the dialout group with
 ```console
-foo@bar:~$ sudo usermod -a -G dialout $USER
+sudo usermod -a -G dialout $USER
 ```
 to start up moesspruinoX locally, make it executable
 ```console
-foo@bar:~$ sudo chmod 644 moesspruino
+sudo chmod 777 moesspruino
 ```
-to shut the server kill the process through a terminal
+to shut the server and release localhost:8080 kill the process through the terminal
 ```console
-foo@bar:~$ killall -9 moesspruino
+killall -9 moesspruino
 ```
-if running a vbox linux guest in windows, forward com host-ports and note that  
+if running a vbox linux guest in windows, forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that  
 `com1 == ttyS1 | com2 == ttyS2 etc.`
 
-firmware for ESP8266
---------------------
+firmware for ESP8266 (win)
+--------------------------
 the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically  
 with the included espruino firmware by checking the windows registry for Silab devices on COM ports
 
-SililconLabs usb driver
------------------------
+SililconLabs usb driver (win)
+-----------------------------
 if `infoCOM.bat` in the `flash` directory can not detect an ESP8266 device you might have to install [CP210x USB to UART Bridge](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
