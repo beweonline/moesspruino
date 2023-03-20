@@ -82,6 +82,14 @@ then make your $user-account a member of the dialout group with
 ```console
 foo@bar:~$ sudo usermod -a -G dialout $USER
 ```
+to start up moesspruinoX locally, make it executable
+```console
+foo@bar:~$ sudo chmod 644 moesspruino
+```
+to shut the server kill the process through a terminal
+```console
+foo@bar:~$ killall -9 moesspruino
+```
 if running a vbox linux guest in windows, forward com host-ports and note that  
 `com1 == ttyS1 | com2 == ttyS2 etc.`
 
