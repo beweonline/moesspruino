@@ -90,8 +90,8 @@ to shut the server and release localhost:8080 kill the process through the termi
 ```console
 killall -9 moeXpruino64.bin
 ```
-if running a vbox linux guest in windows, forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that  
-`com1 == ttyS1 | com2 == ttyS2 etc.`
+if running a vbox linux guest in windows, forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that tty is zero based  
+`com1 == ttyS0 | com2 == ttyS1 etc.`
 
 firmware for ESP8266 (win)
 --------------------------
