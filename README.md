@@ -82,13 +82,13 @@ then make your $user-account a member of the dialout group with
 ```console
 sudo usermod -a -G dialout $USER
 ```
-to start up moeXpruino.bin locally, make it executable
+to start up moeXpruino64.bin locally, make it executable
 ```console
-sudo chmod 777 moeXpruino.bin
+sudo chmod 777 moeXpruino64.bin
 ```
 to shut the server and release localhost:8080 kill the process through the terminal
 ```console
-killall -9 moeXpruino.bin
+killall -9 moeXpruino64.bin
 ```
 if running a vbox linux guest in windows, forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that  
 `com1 == ttyS1 | com2 == ttyS2 etc.`
