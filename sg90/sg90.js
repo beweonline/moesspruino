@@ -1,4 +1,4 @@
-// george.kiwi 2023.03 servo control for sg90 V2.3.8b "don't var inside for()"
+// george.kiwi 2023.03 servo control for sg90 V2.3.8b "ready to mangle"
 
 var move = ["m", "move", 0, undefined];
 var pulse = ["p", "pulse", 1];
