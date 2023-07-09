@@ -1,0 +1,301 @@
+{
+ "info": {
+  "name": "ESP8266",
+  "espruino_page_link": "EspruinoESP8266",
+  "default_console": "EV_SERIAL1",
+  "default_console_baudrate": "115200",
+  "variables": 1600,
+  "binary_name": "espruino_%v_esp8266_4mb",
+  "build": {
+   "libraries": [
+    "NET",
+    "TELNET",
+    "GRAPHICS",
+    "CRYPTO",
+    "NEOPIXEL"
+   ],
+   "makefile": [
+    "FLASH_4MB=1",
+    "ESP_FLASH_MAX=831488",
+    "FLASH_BAUD=460800"
+   ]
+  },
+  "image_url": "http://www.espruino.com/img/ESP8266_4MB.jpg",
+  "thumb_url": "http://www.espruino.com/img/ESP8266_4MB_thumb.jpg",
+  "binary_version": "2v15",
+  "binary_url": "http://www.espruino.com/binaries/espruino_2v15_esp8266_4mb",
+  "builtin_modules": [
+   "Flash",
+   "Storage",
+   "heatshrink",
+   "net",
+   "dgram",
+   "http",
+   "NetworkJS",
+   "Wifi",
+   "ESP8266",
+   "TelnetServer",
+   "crypto",
+   "neopixel"
+  ]
+ },
+ "chip": {
+  "part": "ESP8266",
+  "family": "ESP8266",
+  "package": "",
+  "ram": 80,
+  "flash": 0,
+  "speed": 160,
+  "usart": 2,
+  "spi": 1,
+  "i2c": 1,
+  "adc": 1,
+  "dac": 0,
+  "saved_code": {
+   "address": 831488,
+   "page_size": 4096,
+   "pages": 48,
+   "flash_available": 812
+  }
+ },
+ "devices": {},
+ "pins": [
+  {
+   "name": "D0",
+   "sortingname": "D00",
+   "port": "D",
+   "num": "0",
+   "functions": {
+    "LED_1": 0
+   },
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D1",
+   "sortingname": "D01",
+   "port": "D",
+   "num": "1",
+   "functions": {
+    "USART1_TX": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "USART": [
+     "USART1_TX"
+    ]
+   }
+  },
+  {
+   "name": "D2",
+   "sortingname": "D02",
+   "port": "D",
+   "num": "2",
+   "functions": {
+    "USART2_TX": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "USART": [
+     "USART2_TX"
+    ]
+   }
+  },
+  {
+   "name": "D3",
+   "sortingname": "D03",
+   "port": "D",
+   "num": "3",
+   "functions": {
+    "USART1_RX": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "USART": [
+     "USART1_RX"
+    ]
+   }
+  },
+  {
+   "name": "D4",
+   "sortingname": "D04",
+   "port": "D",
+   "num": "4",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D5",
+   "sortingname": "D05",
+   "port": "D",
+   "num": "5",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D6",
+   "sortingname": "D06",
+   "port": "D",
+   "num": "6",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D7",
+   "sortingname": "D07",
+   "port": "D",
+   "num": "7",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D8",
+   "sortingname": "D08",
+   "port": "D",
+   "num": "8",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D9",
+   "sortingname": "D09",
+   "port": "D",
+   "num": "9",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D10",
+   "sortingname": "D10",
+   "port": "D",
+   "num": "10",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D11",
+   "sortingname": "D11",
+   "port": "D",
+   "num": "11",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D12",
+   "sortingname": "D12",
+   "port": "D",
+   "num": "12",
+   "functions": {
+    "SPI1_MISO": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "SPI": [
+     "SPI1_MISO"
+    ]
+   }
+  },
+  {
+   "name": "D13",
+   "sortingname": "D13",
+   "port": "D",
+   "num": "13",
+   "functions": {
+    "SPI1_MOSI": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "SPI": [
+     "SPI1_MOSI"
+    ]
+   }
+  },
+  {
+   "name": "D14",
+   "sortingname": "D14",
+   "port": "D",
+   "num": "14",
+   "functions": {
+    "SPI1_SCK": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "SPI": [
+     "SPI1_SCK"
+    ]
+   }
+  },
+  {
+   "name": "D15",
+   "sortingname": "D15",
+   "port": "D",
+   "num": "15",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "D16",
+   "sortingname": "D16",
+   "port": "D",
+   "num": "16",
+   "functions": {},
+   "csv": {},
+   "simplefunctions": {}
+  },
+  {
+   "name": "A0",
+   "sortingname": "A00",
+   "port": "A",
+   "num": "17",
+   "functions": {
+    "ADC1_IN0": 0
+   },
+   "csv": {},
+   "simplefunctions": {
+    "ADC": [
+     "ADC1_IN0"
+    ]
+   }
+  }
+ ],
+ "peripherals": {
+  "USART1": {
+   "TX": [
+    "D1"
+   ],
+   "RX": [
+    "D3"
+   ]
+  },
+  "USART2": {
+   "TX": [
+    "D2"
+   ]
+  },
+  "SPI1": {
+   "MISO": [
+    "D12"
+   ],
+   "MOSI": [
+    "D13"
+   ],
+   "SCK": [
+    "D14"
+   ]
+  },
+  "ADC": {
+   "": [
+    "A0"
+   ]
+  }
+ }
+}

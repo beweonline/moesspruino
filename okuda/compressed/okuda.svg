@@ -1,0 +1,52 @@
+<g>
+<rect x="206.53" y="81.912" width="5.6843e-14" height="0" rx="0" ry="0" fill="#0f0" fill-opacity=".83401" stroke-linecap="square" stroke-width=".5" style="paint-order:fill markers stroke"/>
+<rect width="338.67" height="190.5" style="paint-order:fill markers stroke"/>
+</g>
+<g>
+<path id="stripLeft" d="m21.816 11.978h47.79v39.024h-43.865c-13.31 5e-6 -13.31 11.29-13.918 139.5h-7.9591v-139.12c0-11.82 0-39.404 17.952-39.404z" fill="#fc0" style="paint-order:fill markers stroke"/>
+<path id="Servo1" d="m121.73 11.978h-47.79v34.194h47.79z" style="fill:#cd87de;paint-order:fill markers stroke"/>
+<path id="Servo2" d="m173.86 11.978h-47.79v34.194h47.79z" style="fill:#8787de;paint-order:fill markers stroke"/>
+<path id="Servo3" d="m225.99 11.978h-47.79v34.194h47.79z" style="fill:#de87aa;paint-order:fill markers stroke"/>
+<path id="Servo4" d="m278.12 11.978h-47.79v34.194h47.79z" style="fill:#b380ff;paint-order:fill markers stroke"/>
+<path id="stripRight" d="m338.67 11.935h-56.208v39.109h56.208z" fill="#fc0" style="paint-order:fill markers stroke"/>
+<path id="plusTop" transform="scale(.26458)" d="m870.54 287.68v147.49h106.88c40.855 0 73.746-32.891 73.746-73.746 0-40.855-32.891-73.746-73.746-73.746z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="positionBar" transform="scale(.26458)" d="m279.48 435.17h574.67v-147.49h-574.67z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="minusTop" d="m69.606 76.116h-28.278c-10.81 0-19.512 8.7024-19.512 19.512 0 10.81 8.7024 19.512 19.512 19.512h28.278z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="positionReset" transform="scale(-1,1)" d="m-319.15 76.116h17.184c10.81 0 19.512 8.7023 19.512 19.512v1.9e-5c0 10.81-8.7023 19.512-19.512 19.512h-17.184c-10.81 0-19.512-8.7023-19.512-19.512v-1.9e-5c0-10.81 8.7023-19.512 19.512-19.512z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="plusBottom" d="m230.33 128.28v39.024h28.278c10.81 0 19.512-8.7024 19.512-19.512s-8.7024-19.512-19.512-19.512z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="incrementBar" d="m73.945 167.3h152.05v-39.024h-152.05z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="minusBottom" d="m69.607 128.28h-28.278c-10.81 0-19.512 8.7024-19.512 19.512s8.7024 19.512 19.512 19.512h28.278z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="incrementReset" d="m319.15 128.28h-17.184c-10.81 0-19.512 8.7023-19.512 19.512v2e-5c0 10.81 8.7023 19.512 19.512 19.512h17.184c10.81 0 19.512-8.7023 19.512-19.512v-2e-5c0-10.81-8.7023-19.512-19.512-19.512z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<g id="plusBottomSymbol" transform="translate(201.4 52.58)" aria-label="+">
+<path id="path997" d="m62.568 99.057h-8.3792v8.2126h-7.8241v-8.2126h-8.2101v-7.8241h8.2101v-8.0852h7.8241v8.0852h8.3792v7.8241z" stroke-width=".26458"/>
+</g>
+<g d="minusBottomSymbol" transform="matrix(1.2546 0 0 1.2304 -330.9 51.12)" aria-label="-">
+<path id="path1008" d="m311.56 81.743h-16.846v-6.3588h16.846z" stroke-width=".21295"/>
+</g>
+<g id="plusTopSymbol" transform="translate(201.4 .37639)" aria-label="+">
+<path id="path1051" d="m62.568 99.057h-8.3792v8.2126h-7.8241v-8.2126h-8.2101v-7.8241h8.2101v-8.0852h7.8241v8.0852h8.3792v7.8241z" stroke-width=".26458"/>
+</g>
+<g id="minusTopSymbol" transform="matrix(1.2546 0 0 1.2304 -330.9 -1.0833)" aria-label="-">
+<path id="path1055" d="m311.56 81.743h-16.846v-6.3588h16.846z" stroke-width=".21295"/>
+</g>
+<path id="Servo1b" d="m121.73 51.002h-47.79v-4.8297h47.79z" fill="#cd87de" style="paint-order:fill markers stroke"/>
+<path id="Servo2b" d="m173.86 51.002h-47.79v-4.8297h47.79z" fill="#8787de" opacity=".4" style="paint-order:fill markers stroke"/>
+<path id="Servo3b" d="m225.99 51.002h-47.79v-4.8297h47.79z" fill="#de87aa" opacity=".4" style="paint-order:fill markers stroke"/>
+<path id="Servo4b" d="m278.12 51.002h-47.79v-4.8297h47.79z" fill="#b380ff" opacity=".4" style="paint-order:fill markers stroke"/>
+<path id="stripRightb" d="m338.67 51.044h-56.208v-4.8297h56.208z" fill="#230000" opacity=".4" style="paint-order:fill markers stroke"/>
+<path id="stripLeftb" d="m26.219 46.172h43.388v4.8297h-41.678c-12.646 5e-6 -12.646 11.29-13.224 139.5h-2.8815v-97.864c0-19.644 0-46.464 14.396-46.464z" fill="#230000" opacity=".4" style="paint-order:fill markers stroke"/>
+</g>
+<g>
+<path id="positionSlider" d="m128.52 76.116h42.888v2e-6 39.024 0h-42.888v0-39.024-2e-6z" stroke="#000" stroke-linecap="square" stroke-width=".5" style="paint-order:fill markers stroke"/>
+<text id="positionText" transform="scale(.7281 1.3734)" x="179.47057" y="83.294205" fill="#ffcc00" font-family="Arial" font-size="38.551px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan981" x="179.47057" y="83.294205" fill="#ffcc00" font-family="Arial" font-weight="bold" stroke-width=".26458">2.7</tspan></text>
+<text id="positionResetText" transform="scale(.71537 1.3979)" x="416.19958" y="78.498154" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1011" x="416.19958" y="78.498154" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">2.7</tspan></text>
+<text id="incrementResetText" transform="scale(.71537 1.3979)" x="419.44022" y="115.81248" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1015" x="419.44022" y="115.81248" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">40</tspan></text>
+<text id="Servo1Text" transform="scale(.71537 1.3979)" x="118.406" y="31.312492" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1019" x="118.406" y="31.312492" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">D0</tspan></text>
+<text id="Servo2Text" transform="scale(.71537 1.3979)" x="193.18115" y="31.483906" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1023" x="193.18115" y="31.483906" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">D1</tspan></text>
+<text id="Servo3Text" transform="scale(.71537 1.3979)" x="264.21268" y="31.483906" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1027" x="264.21268" y="31.483906" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">D2</tspan></text>
+<text id="Servo4Text" transform="scale(.71537 1.3979)" x="336.97888" y="31.305637" fill="#000000" font-family="Arial" font-size="28.084px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1031" x="336.97888" y="31.305637" fill="#000000" font-family="Arial" font-weight="bold" stroke-width=".26458">D3</tspan></text>
+<path id="incrementSlider" d="m128.52 128.28h42.888v1e-5 39.024 0h-42.888v0-39.024-1e-5z" stroke="#000" stroke-linecap="square" stroke-width=".5" style="paint-order:fill markers stroke"/>
+<text id="incrementText" transform="scale(.73034 1.3692)" x="184.43608" y="121.71701" fill="#ffcc00" font-family="Arial" font-size="38.432px" font-weight="bold" stroke-width=".26458" style="line-height:1.25" xml:space="preserve"><tspan id="tspan1065" x="184.43608" y="121.71701" fill="#ffcc00" font-family="Arial" font-weight="bold" stroke-width=".26458">40</tspan></text>
+<path id="Play" d="m322.75 29.902-10.658 6.3109-10.794 6.0743-0.13659-12.385 0.13659-12.385 10.794 6.0743z" fill="#230000" opacity=".4" style="paint-order:fill markers stroke"/>
+<path id="Stop" d="m299.18 17.517h24.712v1e-6 24.712 1e-6h-24.712v-1e-6 -24.712-1e-6z" fill="#230000" opacity=".4" style="paint-order:fill markers stroke"/>
+</g>

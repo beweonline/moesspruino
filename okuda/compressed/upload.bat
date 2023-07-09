@@ -1,0 +1,2 @@
+espruino -m -v -b 115200 --board ESP8266_4MB.json --storage sg90.js:sg90.js --storage okuda.svg:okuda.svg --storage okuda.js:okuda.js --storage okuda.html:okuda.html --storage id.txt:id.txt --storage server.js:server.js
+PAUSE
