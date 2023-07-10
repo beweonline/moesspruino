@@ -1,15 +1,55 @@
 # [moesspruino](https://beweonline.github.io/)
 a robotics project originally for Moessinger junior high school design and technology education  
-includes a customized Espruino IDE, an object-orientated sg90 servo library, schematics for the robot arm, an ajax interface for its mobile cnc  
+includes a customized Espruino IDE, an object-orientated sg90 servo library, schematics for a robot arm, an ajax interface for its mobile cnc  
 changes to the original IDE are documented in `customizations.txt`  
 tutorials and walkthrough to be handed in after test run, late 2023
 
 background
 ----------
-main interrest is constructing a model of a portal/gantry robot with pick-and-place functionality from scratch  
+main interrest is constructing a model of a articulated robot with pick-and-place functionality from scratch  
 K8/9 pupils want to program animations for several servo motors with minimal supervision  
 gentle exposure to cnc and oo-programming to comply with Austrian national curriculum changes  
-project total cost per individual robot including NodeMCU esp8266 is limited to 10-15€
+aside initial setup costs the project's annual recurrent expense per unit shouldn't exceed 10 - 15€  
+as of spring 2023 the total post-covid expenditure for a single moessARM robot including all the items from the list below amounts to roughly 36€
+
+cost
+----
+affording robotics projects in a public school without funding is very cost sensitive  
+every effort has been taken to design a system that strikes a balance between managablility and affordability  
+bulk order is crucial as is 
+
+| item  | quantity | price € |
+| ------------- | ------------- | ------------- |
+| Servo SG90 | 4 | 7.55 |
+| NodeMCU Amica | 1 | 4.34 |
+|  |  | 12 |
+|  |  |  |
+| 9V adapter | 1 | 5.04 |
+| breadboard | 1 | 3.36 |
+| micro USB cable | 1 | 2.35 |
+| HW313 breadboard ps module | 1 | 1.79 |
+| Dupont cable male-male | 4x3 | 1.09 |
+| Dupont cable female-male | 1x3 | 0.30 |
+|  |  | 14 |
+|  |  |  |
+| flanged rotary bearing | 1 | 3.53 |
+| rubber collar M4 | 16 | 0.95 |
+| crimp-on ring terminals | 10 | 0.81 |
+| screw eye 4/10 | 17 | 0.64 |
+| micro screw M2 | 10 | 0.39 |
+| M4 bolt 10mm | 12 | 0.20 |
+| M4 bolt 40mm | 2 | 0.06 |
+| M4 6-edge nut | 15 | 0.14 |
+| wooden rod M4 | 1 | 0.06 |
+| bolt sleeve | 2 | 0.10 |
+|  |  |  |
+| 4mm plywood birch A3 | 1 | 1.99 |
+| 2cm^3 cube beech | 12 | 1.21 |
+| spatula beech | 10 | 0.32 |
+| skewer bamboo | 6 | 0.04 |
+|  |  | 10.5 |
+|  |  |  |
+|  |  | 36.25 |
 
 descent
 -------
@@ -18,13 +58,13 @@ wifi equipped chips can act as servers and host websites / services
 programming of hardware, server and websites done in only one concurrent language: [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  
 an interactive development evnironment [IDE](https://www.espruino.com/ide/) is provided as a webpage  
 from there compatible chips can be addressed interactively through a responsive [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) console  
-espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via smartphone hotspots  
-established project is a very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and concise [API](https://www.espruino.com/Reference#software) reference
+espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via hotspots  
+it's an established project that's very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and a concise [API](https://www.espruino.com/Reference#software) reference
 
 ide status
 ----------
-- [x] moesspruino binaries and webide tested to run on personal win10 win7 linux64 installations, however:  
-- [ ] web-serial might not be accessing usb devices properly on every windows machine.  
+- [x] moesspruino binaries and web-ide tested to run on personal win10 win7 linux64 installations, however:  
+- [ ] web-serial might not be accessing usb devices properly on every windows machine  
       monitor chrome's device log @
 
 ```javascript
@@ -32,8 +72,10 @@ chrome://device-log/?refresh=%3Csec%3E
 ```
 
 - [ ] confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/) and look out for 'framing errors'  
-      a version of Teranishi's Terminal for working with the ESP8266 is provided as temporary workaround  
-      or use linux or a virtual machine with a linux image as an alternative
+      a version of Teranishi's Terminal for working with the ESP8266 is provided as a temporary workaround  
+      or use linux or a virtual machine with a linux image as an alternative environment
+      with moessbian a VirtualBox image of an especially frugal version of debian with chrome and moeXpruino preinstalled is provided
+      this was necessary due to restrictions of my school's system administration making debugging driver impediments impossible
 
 online access
 -------------
