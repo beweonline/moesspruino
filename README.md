@@ -1,39 +1,83 @@
-# [moesspruino](https://beweonline.github.io/)
-a robotics project originally for Moessinger junior high school design and technology education  
-includes a customized Espruino IDE, an object-orientated sg90 servo library, schematics for the robot arm, an ajax interface for its mobile cnc  
-changes to the original IDE are documented in `customizations.txt`  
-tutorials and walkthrough to be handed in after test run, late 2023
+# [moessARM](https://beweonline.github.io/)
+...is a robotics project originally for [Moessinger](https://www.moessinger.at/index.php/angebot/htl-kooperationsklasse) junior high school's design and technology education  
+it's originally intended for the school's H track that cooperates with the adjacent vocational institute for [electrical engineering](https://htl-klu.at/et)  
+the project includes a number of subsystems like
+-  **moesspruino** a customized Espruino IDE
+-  **sg90.js** an object-orientated sg90 servo library
+-  **moessARM** schematics for a robot arm
+-  **okuda rc** an ajax interface for its mobile cnc
+-  didactic material on a project website
+-  **moessbian** a custom Debian as a vbox virtual machine  
+
+tutorials and walkthrough can be expected after the test run, late 2023
 
 background
 ----------
-main interrest is constructing a model of a portal/gantry robot with pick-and-place functionality from scratch  
+the main interrest lies in constructing a model of an articulated robot with pick-and-place functionality, _from scratch_  
 K8/9 pupils want to program animations for several servo motors with minimal supervision  
-gentle exposure to cnc and oo-programming to comply with Austrian national curriculum changes  
-project total cost per individual robot including NodeMCU esp8266 is limited to 10-15€
+gentle exposure to cnc and oo-programming to comply with Austrian national curriculum changes in t/d education  
+aside from initial setup costs the project's annual recurrent expense per unit shouldn't exceed 10€  
+while electronic equipment would remain at school, parents would cover the cost for the mechanical structure which pupils get to keep  
+as one may learn from the below statement of costs, school has to fund 26€ for reusable material while legal guardians contribute 10€  
+if teamwork is employed as a means of speeding up mechanical construction, an amicable mode of sharing or assigning cost has to be found
 
-descent
+cost
+----
+...is a matter of particular interest when affording robotics within the public school sector without government funding  
+every effort has been taken to design a didactic system that strikes a balance between affordability and the prerequisite to foster independent crafting by the student  
+needles to mention that bulk order from global dealers is crucial in obtaining favourable discount  
+as of spring 2023 the total post-covid expenditure for a single moessARM robot including all the items from the list below amounted to roughly 36€  
+common workshop expendables like sand paper, drillers, express white glue, hot glue and such have been neglected here
+
+| **_electronics_**  | quantity | price € || **_lab accessories_**  | quantity | price € |
+| ------------- | ------------- | ------------- |-| ------------- | ------------- | ------------- |
+|  | |  |  |  ||  |  |
+| Servo SG90 | 4 | 7.55 || 9V adapter | 1 | 5.04 |
+| NodeMCU Amica | 1 | 4.34 || breadboard | 1 | 3.36 |
+| Dupont cable male-male | 4x3 | 1.09 || micro USB cable | 1 | 2.35 |
+| Dupont cable female-male | 1x3 | 0.30 || HW313 breadboard ps module | 1 | 1.79 |
+|  |  | **13,-** | |  |  | **13,-** |
+
+| **_mechanical components_** | quantity | price € || **_structural material_** | quantity | price € |
+| ------------- | ------------- | ------------- |-| ------------- | ------------- | ------------- |
+| flanged rotary bearing | 1 | 3.53 || wooden rod M4 | 1 | 0.06 |
+| rubber collar M4 | 16 | 0.95 || 4mm plywood birch A3 | 1 | 1.99 |
+| crimp-on ring terminals | 10 | 0.81 || 2cm<sup>3</sup> cube beech | 12 | 1.21 |
+| screw eye 4/10 | 17 | 0.64 || spatula beech | 10 | 0.32 |
+| micro screw M2 | 10 | 0.39 || skewer bamboo | 6 | 0.04 |
+| M4 bolt 10mm | 12 | 0.20 |
+| M4 bolt 40mm | 2 | 0.06 |
+| M4 6-edge nut | 15 | 0.14 |
+| plastic bolt sleeve | 2 | 0.10 |
+|  |  |||  |  | **10.5,-** |
+
+moesspruino's descent
 -------
 [espruino](https://github.com/espruino) provides low-threshold access to microcontrollers  
 wifi equipped chips can act as servers and host websites / services  
 programming of hardware, server and websites done in only one concurrent language: [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  
 an interactive development evnironment [IDE](https://www.espruino.com/ide/) is provided as a webpage  
-from there compatible chips can be addressed interactively through a responsive [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) console  
-espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via smartphone hotspots  
-established project is a very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and concise [API](https://www.espruino.com/Reference#software) reference
+from there compatible chips can be addressed interactively through a responsive [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) console or a full-fledged editor  
+espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) communication and thus remote control and telemetry via hotspots  
+it's an established project that's very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and a concise [API](https://www.espruino.com/Reference#software) reference  
+changes to the original IDE are documented in `customizations.txt`  
 
 ide status
 ----------
-- [x] moesspruino binaries and webide tested to run on personal win10 win7 linux64 installations, however:  
-- [ ] web-serial might not be accessing usb devices properly on every windows machine.  
+- [x] moesspruino binaries and web-ide tested to run on personal win10 win7 linux64 installations, however:  
+- [ ] web-serial might not be accessing usb devices properly on every windows machine  
       monitor chrome's device log @
 
 ```javascript
 chrome://device-log/?refresh=%3Csec%3E
 ```
 
-- [ ] confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/) and look out for 'framing errors'  
-      a version of Teranishi's Terminal for working with the ESP8266 is provided as temporary workaround  
-      or use linux or a virtual machine with a linux image as an alternative
+- [ ] confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/) and look out for 'framing errors'
+
+a version of Teranishi's Terminal for working with the ESP8266 is provided as a temporary workaround on MS windows  
+or use linux or a virtual machine with a linux image as an alternative environment  
+with **_moessbian_** a VirtualBox image of an especially frugal version of debian with chrome and **_moeXpruino_** preinstalled is provided  
+this was necessary due to restrictions of my school's system administration making debugging driver impediments impossible
 
 online access
 -------------
