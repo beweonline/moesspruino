@@ -1,11 +1,15 @@
-// george.kiwi 2023.03 servo control for sg90 V2.3.8b "ready to mangle"
+// george.kiwi 2023.03 servo control for sg90 V2.3.10 "summer break"
 
-var move = ["m", "move", 0, undefined];
-var pulse = ["p", "pulse", 1];
+// manage console logging
+global.verbose = function(bool){
+	if(bool){
+		global.log = console.log();
+	} else {
+		global.log = function(){};
+	}
+};
 
-if(global.log == undefined){
-	global.log = function(){};
-}
+global.verbose(false);
 
 // object instantiation & option merging
 function _connect(options) {
@@ -32,6 +36,7 @@ function _setup(servos) {
     global["servo" + i].id = i;
     i++;
   }
+  // globals
   global.sleep = _sleepAll;
   global.wake = _wakeAll;
   global.calibrate = _calibrateAll;
@@ -82,7 +87,7 @@ function _wakeAll() {
   });
 }
 
-function _calibrateAll(mode, sleep) {
+function _calibrateAll(mode) {
   return new Promise((res) => {
     var calibrations = [];
 	var promise;
@@ -90,7 +95,8 @@ function _calibrateAll(mode, sleep) {
       promise = servo.calibrate(mode);
       calibrations.push(promise);
     }
-    Promise.all(calibrations).then(_ => (log('all calibrated('+mode+')'), res("done")) );
+    Promise.all(calibrations)
+	.then(_ => (log('all calibrated('+mode+')'), res("done")) );
   });
 }
 
@@ -108,7 +114,7 @@ function _checkStatus(servo, property) {
   });
 }
 
-function  stepper(servo, start, stop, duration, direction) {
+function stepper(servo, start, stop, duration, direction) {
   // purpose: #1 mem control through recursion
   //          #2 keep Servo.move() thenable
   var event = function(servo) {
@@ -141,7 +147,8 @@ var _Servo = {
   interval: null,
   alive: false,
   timeout: 500,
-  idle: true
+  idle: true,
+  pause: _pause
 };
 
 _Servo.msg = function(msg, force, servo){
@@ -153,10 +160,10 @@ _Servo.msg = function(msg, force, servo){
 
 _Servo.calibrate = function(mode) {
   return new Promise((res) => {
-    if (pulse.includes(mode)) {
+    if (["p", "pulse", 1].includes(mode)) {
       this.pulse(2.7)
       .then(_=> {this.msg("calibrate(p)", 1); res();});
-    } else if (move.includes(mode)) {
+    } else if (["m", "move", 0, undefined].includes(mode)) {
       this.move(2.7,10)
       .then(msg => {this.msg("calibrate(m)", 1); res(msg);});
     }
@@ -197,29 +204,29 @@ _Servo.sleep = function() {
 };
 
 _Servo.sweep = function(start, stop, duration, res){
-	  // sweep through range of positions
+	 // sweep through range of positions
 	this.idle = false;
 	var steps = Math.round((stop - start) / this.increment);
-	// return new Promise((res) => {
-		var cont = function(servo){
-			servo.msg('move('+start+'>'+stop+'/'+duration+')', 1);
-			servo.on('stepper', _ => {
-			  setTimeout(_ => {servo.idle = true;
-				servo.msg('move_complete'); res('moved');}, servo.timeout);
-			});
-			stepper(servo, start, stop, duration, (steps / Math.abs(steps)));
-			servo.msg('step-duration: '+duration+', steps :'+steps+
-				', TimeOut: '+Math.abs((duration) * steps)+'ms');
-			};
-		if (this.alive == false) {
-		  this.position = start; this.wake().then(_=> cont(this));
-		} else { cont(this); }
-	// }); // Promise
+
+	var cont = function(servo){
+		servo.msg('move('+start+'>'+stop+'/'+duration+')', 1);
+		servo.on('stepper', _ => {
+		  setTimeout(_ => {servo.idle = true;
+			servo.msg('move_complete'); res('moved');}, servo.timeout);
+		});
+		stepper(servo, start, stop, duration, (steps / Math.abs(steps)));
+		servo.msg('step-duration: '+duration+', steps :'+steps+
+			', TimeOut: '+Math.abs((duration) * steps)+'ms');
+		};
+
+	if (this.alive == false) {
+		this.position = start; this.wake().then(_=> cont(this));
+	} else { cont(this); }
 };
 
 _Servo.move = function() {
-  // sweep through a range of positions
-  // check for valid arguments
+	// sweep through a range of positions
+	// check for valid arguments
 	var start, stop, duration;
 	var arg = arguments;
 	var msg = "";

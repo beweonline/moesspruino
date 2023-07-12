@@ -1,7 +1,15 @@
-// george.kiwi 2023.03 servo control for sg90 V2.3.8b "ready to mangle"
+// george.kiwi 2023.03 servo control for sg90 V2.3.10 "summer break"
 
-var move = ["m", "move", 0, undefined];
-var pulse = ["p", "pulse", 1];
+// manage console logging
+global.verbose = function(bool){
+	if(bool){
+		global.log = console.log();
+	} else {
+		global.log = function(){};
+	}
+};
+
+global.verbose(false);
 
 // object instantiation & option merging
 function _connect(options) {
@@ -28,6 +36,7 @@ function _setup(servos) {
     global["servo" + i].id = i;
     i++;
   }
+  // globals
   global.sleep = _sleepAll;
   global.wake = _wakeAll;
   global.calibrate = _calibrateAll;
@@ -50,7 +59,7 @@ function _stop(){
 	}
 	setTimeout(_=> {
 		global.servos = null;
-		print('+ servos nullified +');
+		log('+ servos nullified +');
 	}, 200);
 }
 
@@ -62,7 +71,7 @@ function _sleepAll() {
       promise = servo.sleep();
       sleepers.push(promise);
     }
-    Promise.all(sleepers).then(_ => (print('all asleep'), res("done")) );
+    Promise.all(sleepers).then(_ => (log('all asleep'), res("done")) );
   });
 }
 
@@ -74,11 +83,11 @@ function _wakeAll() {
       promise =  servo.wake();
       risers.push(promise);
     }
-    Promise.all(risers).then(_ => (print('all awake'), res("done")) );
+    Promise.all(risers).then(_ => (log('all awake'), res("done")) );
   });
 }
 
-function _calibrateAll(mode, sleep) {
+function _calibrateAll(mode) {
   return new Promise((res) => {
     var calibrations = [];
 	var promise;
@@ -86,7 +95,8 @@ function _calibrateAll(mode, sleep) {
       promise = servo.calibrate(mode);
       calibrations.push(promise);
     }
-    Promise.all(calibrations).then(_ => (print('all calibrated('+mode+')'), res("done")) );
+    Promise.all(calibrations)
+	.then(_ => (log('all calibrated('+mode+')'), res("done")) );
   });
 }
 
@@ -104,14 +114,14 @@ function _checkStatus(servo, property) {
   });
 }
 
-function  stepper(servo, start, stop, duration, direction) {
+function stepper(servo, start, stop, duration, direction) {
   // purpose: #1 mem control through recursion
   //          #2 keep Servo.move() thenable
   var event = function(servo) {
     servo.emit('stepper');
     servo.removeAllListeners('stepper');
   };
-  if (servo.alive === true && (start.toFixed(2) !== stop.toFixed(2)) ) {
+  if (servo.alive === true && start.toFixed(2) !== stop.toFixed(2) ) {
     setTimeout(_ => {
       servo.position = start;
       servo.msg('step', 0, servo);
@@ -136,22 +146,24 @@ var _Servo = {
   verbose: false,
   interval: null,
   alive: false,
-  timeout: 500
+  timeout: 500,
+  idle: true,
+  pause: _pause
 };
 
 _Servo.msg = function(msg, force, servo){
 	if(this.verbose || force){
 		if(!servo){servo = this;}
-		print(servo.device+'  '+msg+'  '+servo.position);
+		log(servo.device+'  '+msg+'  '+servo.position);
 	}
 };
 
 _Servo.calibrate = function(mode) {
   return new Promise((res) => {
-    if (pulse.includes(mode)) {
+    if (["p", "pulse", 1].includes(mode)) {
       this.pulse(2.7)
       .then(_=> {this.msg("calibrate(p)", 1); res();});
-    } else if (move.includes(mode)) {
+    } else if (["m", "move", 0, undefined].includes(mode)) {
       this.move(2.7,10)
       .then(msg => {this.msg("calibrate(m)", 1); res(msg);});
     }
@@ -191,59 +203,71 @@ _Servo.sleep = function() {
   });
 };
 
-_Servo.move = function() {
-  // sweep through a range of positions
-  // check for valid arguments
-  var start, stop, duration;
-  var arg = arguments;
-  if (arg.length == 1) {
-    if (arg[0] >= 1 && arg[0] <= 4.5) {
-      start = this.position;
-      stop = arg[0];
-      duration = this.duration;
-    } else {
-      return this.msg("out-of-bounds (stop)");
-    }
-  } else if (arg.length == 2) {
-    //(start, stop) i.e. pulse to start + step to stop
-    if (arg[0] >= 1 && arg[0] <= 4.5 && arg[1] >= 1 && arg[1] <= 4.5) {
-      start = arg[0];
-      stop = arg[1];
-      duration = this.duration;
-    }
-    //(stop, duration)
-    else if (arg[0] >= 1 && arg[0] <= 4.5 && arg[1] >= 10) {
-      stop = arg[0];
-      duration = arg[1];
-      start = this.position;
-    } else {
-      return this.msg("out-of-bounds (start/stop | stop/duration)");
-    }
-    //(start, stop, duration)
-  } else if (arg.length == 3 && arg[2] >= 10 && arg[0] >= 1 &&
-    arg[0] <= 4.5 && arg[1] >= 1 && arg[1] <= 4.5) {
-    start = arg[0];
-    stop = arg[1];
-    duration = arg[2];
-  } else {
-    return this.msg("out-of-bounds (start | stop | duration)");
-  }
-  // sweep through range of positions
-  var steps = Math.round((stop - start) / this.increment);
-  return new Promise((res) => {
+_Servo.sweep = function(start, stop, duration, res){
+	 // sweep through range of positions
+	this.idle = false;
+	var steps = Math.round((stop - start) / this.increment);
+
 	var cont = function(servo){
 		servo.msg('move('+start+'>'+stop+'/'+duration+')', 1);
 		servo.on('stepper', _ => {
-		  setTimeout(_ => {servo.msg('move_complete'); res('moved');}, servo.timeout);
+		  setTimeout(_ => {servo.idle = true;
+			servo.msg('move_complete'); res('moved');}, servo.timeout);
 		});
 		stepper(servo, start, stop, duration, (steps / Math.abs(steps)));
 		servo.msg('step-duration: '+duration+', steps :'+steps+
 			', TimeOut: '+Math.abs((duration) * steps)+'ms');
-	};
-    if (this.alive == false) {
-      this.position = start; this.wake().then(_=> cont(this));
-    } else { cont(this); }
-  });
+		};
+
+	if (this.alive == false) {
+		this.position = start; this.wake().then(_=> cont(this));
+	} else { cont(this); }
+};
+
+_Servo.move = function() {
+	// sweep through a range of positions
+	// check for valid arguments
+	var start, stop, duration;
+	var arg = arguments;
+	var msg = "";
+	var test = null;
+
+	if (arg.length == 1) {
+	if (arg[0] >= 0.9 && arg[0] <= 4.5) {
+		start = this.position;
+		stop = arg[0];
+		duration = this.duration;
+		test = true;
+	} else {msg = "out-of-bounds (stop)";}
+	} else if (arg.length == 2) {
+	//(start, stop) i.e. pulse to start + step to stop
+	if (arg[0] >= 0.9 && arg[0] <= 4.5 && arg[1] >= 1 && arg[1] <= 4.5) {
+		start = arg[0];
+		stop = arg[1];
+		duration = this.duration;
+		test = true;
+	}
+	//(stop, duration)
+	else if (arg[0] >= 0.9 && arg[0] <= 4.5 && arg[1] >= 10) {
+		stop = arg[0];
+		duration = arg[1];
+		start = this.position;
+		test = true;
+	} else {msg = "out-of-bounds (start/stop | stop/duration)";}
+	//(start, stop, duration)
+	} else if (arg.length == 3 && arg[2] >= 10 && arg[0] >= 0.9 &&
+		arg[0] <= 4.5 && arg[1] >= 1 && arg[1] <= 4.5) {
+		start = arg[0];
+		stop = arg[1];
+		duration = arg[2];
+		test = true;
+	} else {msg = "out-of-bounds (start | stop | duration)";}
+
+	return new Promise((res, rej) => {
+		if(test==true){
+			this.sweep(start, stop, duration, res);
+		} else {msg(msg, true); rej();}
+	}); // Promise
 };
 
 // module export
