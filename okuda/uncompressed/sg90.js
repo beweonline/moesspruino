@@ -3,7 +3,7 @@
 // manage console logging
 global.verbose = function(bool){
 	if(bool){
-		global.log = console.log();
+		global.log = console.log;
 	} else {
 		global.log = function(){};
 	}
