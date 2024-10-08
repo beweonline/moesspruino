@@ -1,31 +1,34 @@
 # [moessARM](https://beweonline.github.io/)
+
 ...is a robotics project originally for [Moessinger](https://www.moessinger.at/index.php/angebot/htl-kooperationsklasse) junior high school's design and technology education  
 it's originally intended for the school's H track that cooperates with the adjacent vocational institute for [electrical engineering](https://htl-klu.at/et)  
-the project includes a number of subsystems like
--  **moesspruino** a customized Espruino IDE
--  **sg90.js** an object-orientated sg90 servo library
--  **moessARM** schematics for a robot arm
--  **okuda rc** an ajax interface for its mobile cnc
--  didactic material on a project website
+the project includes a number of subsystems like  
+-  a *project website* with videos and code samples  
+-  *didactic material* - presentations on coding and microcomputing  
+-  **moesspruino** on- and offline versions of a customized Espruino IDE  
+-  **sg90.js** an object-orientated sg90 servo library  
+-  **sg91.js** version for use with mobile programming (gentle on resources)  
+-  **moessARM** schematics / handouts for a 4-servos robotic arm  
+-  **moessARMjunior** schematics for a simple 2-servos arm  
+-  **okuda rc** an ajax sliders interface for mobile cnc  
+-  **editor rc** an ajax repl for mobile programming  
 -  **moessbian** a custom Debian as a vbox virtual machine  
 
-tutorials and walkthrough can be expected after the test run, late 2023
+tutorials and walkthroughs can be expected summer 2025
 
 background
 ----------
-the main interrest lies in constructing a model of an articulated robot with pick-and-place functionality, _from scratch_  
-K8/9 pupils want to program animations for several servo motors with minimal supervision  
-gentle exposure to cnc and oo-programming to comply with Austrian national curriculum changes in t/d education  
-aside from initial setup costs the project's annual recurrent expense per unit shouldn't exceed 10€  
-while electronic equipment would remain at school, parents would cover the cost for the mechanical structure which pupils get to keep  
-as one may learn from the below statement of costs, school has to fund 26€ for reusable material while legal guardians contribute 10€  
-if teamwork is employed as a means of speeding up mechanical construction, an amicable mode of sharing or assigning cost has to be found
+- the main interrest lies in constructing a model of an articulated robot with pick-and-place functionality, _from scratch_  
+- K8/9 pupils want to program animations for several servo motors with minimal supervision  
+- offer gentle exposure to cnc and oo-programming to comply with Austrian national curriculum changes in t/d education  
+- aside from initial setup costs the project's annual *recurrent* expense per unit shouldn't exceed 10€  
+if electronic equipment were to remain at school, parents would cover the expense of the mechanical structure which pupils would get to keep; as one may learn from the below statement of costs, school would've to fund 26€ for reusable materials while legal guardians would contribute a mere 10€; if teamwork is employed as a means of speeding up mechanical construction, an amicable mode of sharing or assigning cost may have to be found;
 
 cost
 ----
-...is a matter of particular interest when affording robotics within the public school sector without government funding  
+...is a matter of particular interest when affording robotics within the public schooling sector and without government funding  
 every effort has been taken to design a didactic system that strikes a balance between affordability and the prerequisite to foster independent crafting by the student  
-needles to mention that bulk order from global dealers is crucial in obtaining favourable discount  
+needles to mention that bulk order from global retailers is crucial in obtaining favourable discount  
 as of spring 2023 the total post-covid expenditure for a single moessARM robot including all the items from the list below amounted to roughly 36€  
 common workshop expendables like sand paper, drillers, express white glue, hot glue and such have been neglected here
 
@@ -62,27 +65,27 @@ espruino facilitates [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) co
 it's an established project that's very well [documented](https://www.espruino.com/) with a supportive [forum](https://forum.espruino.com/) and a concise [API](https://www.espruino.com/Reference#software) reference  
 changes to the original IDE are documented in `customizations.txt`  
 
+*below information is intended for the tech savvy*
 ide status
 ----------
 - [x] moesspruino binaries and web-ide tested to run on personal win10 win7 linux64 installations, however:  
-- [ ] web-serial might not be accessing usb devices properly on every windows machine  
-      monitor chrome's device log @
+- [ ] behind the fences of institutional security systems, web-serial might not be accessing usb devices properly on every windows machine! check access to the device by monitoring chrome's device log @
 
 ```javascript
 chrome://device-log/?refresh=%3Csec%3E
 ```
 
-- [ ] confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/) and look out for 'framing errors'
+- [ ]  verify cleanliness of the signal & confirm compatibility of your machine with [google's web serial demo](https://googlechromelabs.github.io/serial-terminal/) and look out for 'framing errors'
 
-a version of Teranishi's Terminal for working with the ESP8266 is provided as a temporary workaround on MS windows  
+a version of Teranishi's Terminal for working with the ESP8266 is provided as a temporary workaround on MS windows machines with impedence  
 or use linux or a virtual machine with a linux image as an alternative environment  
-with **_moessbian_** a VirtualBox image of an especially frugal version of debian with chrome and **_moeXpruino_** preinstalled is provided  
+with **_moessbian_** a [VirtualBox](https://www.virtualbox.org/) image of an especially frugal version of debian with chrome and **_moeXpruino_** preinstalled is provided  
 this was necessary due to restrictions of my school's system administration making debugging driver impediments impossible
 
 online access
 -------------
-- moesspruino is hosted [here on github.io](https://beweonline.github.io/moesspruino/webIDE/index.html)
-- connect with your microcontroller via the connection button
+- moesspruino is hosted [here on github.io](https://beweonline.github.io/moesspruino/webIDE/index.html)  
+- connect with your microcontroller via the connection button  
 - follow the coding quick start from [espruino.com](http://www.espruino.com/Quick+Start+Code)  
 ```javascript
 // for NodeMCU boards
@@ -96,10 +99,11 @@ var i = setInterval(blink, 500);
 
 binary workflow
 ---------------
-0. for portability reasons and offline use `moesspruino.exe` is a nexe-build of a node project
-1. it starts a node.js server and provides a customized espruino-ide-webpage on localhost:8080/index.html
-2. the system's default browser is called and pointed to that URL  
-   note that your webbrowser must support the web-serial interface (e.g. chrome or MS edge)
+0. for portability reasons and offline use `moesspruino.exe` is a nexe-build of a node project for windows
+   `moeXpruino.bin` is the same nexe-build but fot linux  
+2. it starts a node.js server and provides a customized espruino-ide-webpage on localhost:8080/index.html
+3. the system's default browser is called and pointed to that URL  
+   note that your webbrowser must support the web-serial interface (e.g. chrome, brave or MS edge)
 
 node.js workflow
 ----------------
@@ -117,7 +121,7 @@ make sure you've got the [nexe](https://github.com/nexe/nexe) module [installed]
 linux permissions
 -----------------
 on a \*nix OS, chrome must be allowed to open tty ports  
-by default in a posix terminal you'd usually get
+by default, in a posix terminal, you'd usually get
 ```console
 foo@bar:~$ ls -l /dev/ttyUSB0
 crw-rw----. 1 root dialout 188, 0 Jan 01 00:00 /dev/ttyUSB0
@@ -134,13 +138,13 @@ to shut the server and release localhost:8080 kill the process through the termi
 ```console
 killall -9 moeXpruino64.bin
 ```
-if running a vbox linux guest in windows, forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that tty is zero based  
+if running a vbox linux guest in windows, first make sure the ESP8266 is registered on a COM port less than 4 (because virtual box may loop through only ports 0 to 3). to set go to device manager > ports > cp210x > port settings > advanced > COM port number  
+then forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that in linux tty is zero based  
 `com1 == ttyS0 | com2 == ttyS1 etc.`
 
 firmware for ESP8266 (win)
 --------------------------
-the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically  
-with the included espruino firmware by checking the windows registry for Silab devices on COM ports
+the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically with the included espruino firmware by checking the windows registry for Silab devices on COM ports. if that fails, you may want to try `baudFLASH.bat` to chose the device by it's baud rate of 115200.
 
 SililconLabs usb driver (win)
 -----------------------------
