@@ -66,6 +66,15 @@ it's an established project that's very well [documented](https://www.espruino.c
 changes to the original IDE are documented in `customizations.txt`  
 
 *below information is intended for the tech savvy*
+
+SililconLabs usb driver (win)
+-----------------------------
+if `infoCOM.bat` in the `flash` directory can not detect an ESP8266 device you might have to install [CP210x USB to UART Bridge](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+
+firmware for ESP8266 (win)
+--------------------------
+the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically with the included espruino firmware by checking the windows registry for Silab devices on COM ports. if that fails, you may want to try `baudFLASH.bat` to chose the device by it's baud rate of 115200.
+
 ide status
 ----------
 - [x] moesspruino binaries and web-ide tested to run on personal win10 win7 linux64 installations, however:  
@@ -141,11 +150,3 @@ killall -9 moeXpruino64.bin
 if running a vbox linux guest in windows, first make sure the ESP8266 is registered on a COM port less than 4 (because virtual box may loop through only ports 0 to 3). to set go to device manager > ports > cp210x > port settings > advanced > COM port number  
 then forward host com ports as [host devices](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/serialports.html) and note that in linux tty is zero based  
 `com1 == ttyS0 | com2 == ttyS1 etc.`
-
-firmware for ESP8266 (win)
---------------------------
-the `flash` directory contains a `regFLASH.bat` to flash any ESP8266 board automatically with the included espruino firmware by checking the windows registry for Silab devices on COM ports. if that fails, you may want to try `baudFLASH.bat` to chose the device by it's baud rate of 115200.
-
-SililconLabs usb driver (win)
------------------------------
-if `infoCOM.bat` in the `flash` directory can not detect an ESP8266 device you might have to install [CP210x USB to UART Bridge](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
